@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"  href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css">
+    <link rel="stylesheet" type="text/css"  href="./../profiler.css">
+
+    <title>Spencer's CSV Profiler</title>
+  </head>
+  <body>
+<div class="pageTitle">
+<h1>CSV Profiler</h1>    
+</div>      
+
+
+
+<div class="container">
+
+<!--<div id="accordion" role="tablist">-->
+<!--  <div class="card panel top_panel">-->
+<!--    <div id="panel-1-head" class="card-header" role="tab" data-parent="#accordion" href="#panel-1-data">Overall Report</div>-->
+<!--    <div id="panel-1-data" class="card-block panel-collapse" role="tabpanel">OVERALL REPORT DATA</div>-->
+<!--  </div>-->
+
+<!--  <div class="card panel middle_panel">-->
+<!--    <div id="panel-2-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-2-data">Column 2</div>-->
+<!--    <div id="panel-2-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">Column 2 Data</div>-->
+<!--  </div>-->
+
+<!--  <div class="card panel bottom_panel">-->
+<!--    <div id="panel-3-head" class="card-header bottom_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-3-data">Column 3</div>-->
+<!--    <div id="panel-3-data" class="card-block panel-collapse collapse in" role="tabpanel">Column 3 Data</div>-->
+<!--  </div>-->
+
+
+<!--</div>-->
+
+
+
+
+
+
+<style>
+  .row-index {
+    width: 50px;
+    display: inline-block;
+}
+</style>
+
+<div class="form-inline">
+    <button type="button" 
+            class="btn btn-default mybtn-top">
+        Scroll to top
+    </button>
+    <button type="button" 
+            class="btn btn-default mybtn-row">
+        Scroll to row index: 
+    </button>
+        <input type="number" 
+               class="form-control row-index" 
+               value="3" min="0">
+    <button type="button" 
+            class="btn btn-default mybtn-btm">
+        Scroll to bottom
+    </button>
+</div>
+
+<div style="padding: 10px;">
+    <br>
+    <table id="table" data-search="true" data-show-columns="true" data-pagination="true" data-height="500">
+        <thead>
+            <tr>
+                <th data-field="#" data-sortable="true">#</th>
+                <th data-field="Name" data-sortable="true">Name</th>
+                <th data-field="DataType" data-sortable="true" width="200">DataType</th>
+                <th data-field="Count" data-sortable="true">Count</th>
+                <th data-field="Confidence" data-sortable="true">Confidence</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
+
+    <script>
+var data = [ 
+{ "#": "0", 
+"Name": "zero", 
+"DataType": "ints", 
+"Count": "2108", 
+"Confidence": "66.69%" 
+ }, 
+{ "#": "1", 
+"Name": "one", 
+"DataType": "strings", 
+"Count": "2108", 
+"Confidence": "66.69%" 
+ }, 
+{ "#": "2", 
+"Name": "two", 
+"DataType": "strings", 
+"Count": "1757", 
+"Confidence": "55.58%" 
+ }, 
+{ "#": "3", 
+"Name": "three", 
+"DataType": "strings", 
+"Count": "2458", 
+"Confidence": "77.76%" 
+ }, 
+{ "#": "4", 
+"Name": "four", 
+"DataType": "strings", 
+"Count": "2107", 
+"Confidence": "66.66%" 
+ }, 
+{ "#": "5", 
+"Name": "five", 
+"DataType": "strings", 
+"Count": "1757", 
+"Confidence": "55.58%" 
+ }, 
+{ "#": "6", 
+"Name": "six", 
+"DataType": "strings", 
+"Count": "1755", 
+"Confidence": "55.52%" 
+ }, 
+{ "#": "7", 
+"Name": "seven", 
+"DataType": "strings", 
+"Count": "1756", 
+"Confidence": "55.55%" 
+ }, 
+{ "#": "8", 
+"Name": "eight", 
+"DataType": "strings", 
+"Count": "1756", 
+"Confidence": "55.55%" 
+ }, 
+{ "#": "9", 
+"Name": "nine", 
+"DataType": "strings", 
+"Count": "3161", 
+"Confidence": "100.00%" 
+ }
+ ];
+ 
+ 
+ 
+ 
+ 
+ 
+$(function () {
+    $('#table').bootstrapTable({
+        data: data
+    });
+
+    $(".mybtn-top").click(function () {
+        $('#table').bootstrapTable('scrollTo', 0);
+    });
+    
+    $(".mybtn-row").click(function () {
+        var index = +$('.row-index').val(),
+            top = 0;
+        $('#table').find('tbody tr').each(function (i) {
+        	if (i < index) {
+            	top += $(this).height();
+            }
+        });
+        $('#table').bootstrapTable('scrollTo', top);
+    });
+    
+    $(".mybtn-btm").click(function () {
+        $('#table').bootstrapTable('scrollTo', 'bottom');
+    });
+
+});
+</script>
+
+
+
+    
+  </body>
+</html>
