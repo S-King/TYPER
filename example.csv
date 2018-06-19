@@ -1,8 +1,8 @@
-zero,one,two,three,four,five,six,seven,eight,nine
-1,b,o,1,o,o,1,1,b,positive
-1,b,o,o,1,b,1,o,1,positive
+these,are,the,headers,of,the,data,csv,document,example
+1.00,b,o,1,o,o,1,1,b,positive
+6.91,b,o,o,1,b,1,o,1,positive
 o,b,1,b,o,b,1,1,o,negative
-1,1,o,1,1,o,b,o,o,negative
+1.01,1,o,1,1,o,b,o,o,negative
 b,o,o,o,b,1,1,1,1,positive
 o,b,1,o,o,1,b,1,1,positive
 1,1,o,b,o,1,o,b,b,negative

@@ -2,7 +2,7 @@ class Column(object):
     """Column Object to keep track of each column's analysis"""
 
     def __init__(self, header, col_number):
-        """All we know up front is the column header"""
+        """All we know up front is the column header and number"""
         self.header = header
         self.col_number = col_number
         
@@ -24,10 +24,14 @@ class Column(object):
         self.float_avglength = None
         self.float_maxlength = None
         
-        # Confidence
+        # Confidence and Predictions
         self.predicted_datatype = ''
         self.pd_count = 0
         self.pd_confidence = 0.0
+        self.pd_avglength = 0
+        self.pd_max_length = 0.0        
+        
+        
         
         
     def DatatypeConfidence(self, num_rows):

@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css"  href="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.css">
 
     <title>Spencer's CSV Profiler</title>
 
@@ -33,21 +34,216 @@
       border-top-right-radius: 0px !important;
       /*background-color:purple;*/
   }
-</style>
+  .row-index { 
+     width: 50px; 
+     display: inline-block; 
+ } 
+ </style>
   </head>
   <body>
 <div class="pageTitle">
-<h1>CSV Profiler</h1>    
+<h1 style="padding-top:15px">CSV Profiler</h1>    
 </div>   <!-- End Header / CSS Declarations -->  
+<div class="container" style="padding-bottom:50px"> 
+ <div id="accordion" role="tablist"> 
+   <div class="card panel top_panel"> 
+     <div id="panel-overall-head" class="card-header" role="tab" data-parent="#accordion" href="#panel-overall-data">Overall Report</div> 
+     <div id="panel-overall-data" class="card-block panel-collapse" role="tabpanel"> 
+ <div class="Overall_Top"> 
+     <div class="row"> 
+     <div class="col-6 pt-2" style="height:100px;"> 
+         <div class="col-12"> 
+             Filename : <b>./test.html</b> 
+         </div> 
+         <div class="col-12"> 
+             Size : <b>88571</b> 
+         </div> 
+         <div class="col-12"> 
+             Type : <b>CSV</b> 
+         </div> 
+         <div class="col-12"> 
+             Number of Lines : <b>3161</b> 
+         </div> 
+     </div> 
+      
+     <div class="col-6 pt-2" style="height:100px;"> 
+         <div class="col-12"> 
+             Parameters : <br> 
+             has_header = True, <br> 
+             Delimiter = ",", <br> 
+             Quotes = "Minimal" 
+         </div> 
+     </div> 
+     </div> 
+ </div> 
+          
+     <table id="tableOverall" data-search="true" data-show-columns="true" data-pagination="true" data-height="500"> 
+         <thead> 
+             <tr> 
+                 <th data-field="#" data-sortable="true">#</th> 
+                 <th data-field="Name" data-sortable="true" width="200">Name</th> 
+                 <th data-field="DataType" data-sortable="true">Type</th> 
+                 <th data-field="Count" data-sortable="true">Count</th> 
+                 <th data-field="Confidence" data-sortable="true">Confidence</th> 
+             </tr> 
+         </thead> 
+     </table>        
+     </div> 
+   </div> 
+   <div id="report_panel_0" class="card panel middle_panel">  
+    <div id="panel-0-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-0-data">0 - these</div>  
+    <div id="panel-0-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_0" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_1" class="card panel middle_panel">  
+    <div id="panel-1-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-1-data">1 - are</div>  
+    <div id="panel-1-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_1" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_2" class="card panel middle_panel">  
+    <div id="panel-2-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-2-data">2 - the</div>  
+    <div id="panel-2-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_2" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_3" class="card panel middle_panel">  
+    <div id="panel-3-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-3-data">3 - headers</div>  
+    <div id="panel-3-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_3" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_4" class="card panel middle_panel">  
+    <div id="panel-4-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-4-data">4 - of</div>  
+    <div id="panel-4-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_4" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_5" class="card panel middle_panel">  
+    <div id="panel-5-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-5-data">5 - the</div>  
+    <div id="panel-5-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_5" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_6" class="card panel middle_panel">  
+    <div id="panel-6-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-6-data">6 - data</div>  
+    <div id="panel-6-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_6" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_7" class="card panel middle_panel">  
+    <div id="panel-7-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-7-data">7 - csv</div>  
+    <div id="panel-7-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_7" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_8" class="card panel middle_panel">  
+    <div id="panel-8-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-8-data">8 - document</div>  
+    <div id="panel-8-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_8" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
+  <div id="report_panel_9" class="card panel middle_panel">  
+    <div id="panel-9-head" class="card-header middle_panel" role="tab" data-toggle="collapse" data-parent="#accordion" href="#panel-9-data">9 - example</div>  
+    <div id="panel-9-data" class="card-block panel-collapse collapse in middle_panel" role="tabpanel">  
+    <table id="table_report_9" data-search="false" data-show-columns="false" data-pagination="false" data-height="auto">  
+        <thead>  
+            <tr>  
+                <th data-field="type" data-sortable="true">Type</th>  
+                <th data-field="count" data-sortable="true" width="200">Count</th>  
+                <th data-field="avglength" data-sortable="true">Avg. Length</th>  
+                <th data-field="maxlength" data-sortable="true">Max Length</th>  
+            </tr>  
+        </thead>  
+    </table>          
+    </div>  
+  </div>  
 
+    </div> <!-- End Accordion -->
 
-<div class="container">
-
-<div id="accordion" role="tablist">
-  <div class="card panel top_panel">
-    <div id="panel-1-head" class="card-header" role="tab" data-parent="#accordion" href="#panel-1-data">Overall Report</div>
-    <div id="panel-1-data" class="card-block panel-collapse" role="tabpanel">OVERALL REPORT DATA</div>
-  </div>
+</div> <!-- End Container -->
 
 
     <!-- Begin Footer / Optional JavaScript -->
@@ -55,8 +251,84 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://rawgit.com/wenzhixin/bootstrap-table/master/src/bootstrap-table.js"></script>
 
-    
-    
+
+<script>
+var OverallData = [{"#": "0", "Name": "these", "DataType": "ints", "Count": "2105", "Confidence": "66.59%"}, {"#": "1", "Name": "are", "DataType": "strings", "Count": "2108", "Confidence": "66.69%"}, {"#": "2", "Name": "the", "DataType": "strings", "Count": "1757", "Confidence": "55.58%"}, {"#": "3", "Name": "headers", "DataType": "strings", "Count": "2458", "Confidence": "77.76%"}, {"#": "4", "Name": "of", "DataType": "strings", "Count": "2107", "Confidence": "66.66%"}, {"#": "5", "Name": "the", "DataType": "strings", "Count": "1757", "Confidence": "55.58%"}, {"#": "6", "Name": "data", "DataType": "strings", "Count": "1755", "Confidence": "55.52%"}, {"#": "7", "Name": "csv", "DataType": "strings", "Count": "1756", "Confidence": "55.55%"}, {"#": "8", "Name": "document", "DataType": "strings", "Count": "1756", "Confidence": "55.55%"}, {"#": "9", "Name": "example", "DataType": "strings", "Count": "3161", "Confidence": "100.00%"}] ;
+        $('#tableOverall').bootstrapTable({ 
+          data : OverallData 
+         }); 
+ 
+</script>
+
+<script>
+
+$(document).ready(function() { 
+     // Set the search bar up (kinda) in the middle, above the table 
+     $(".float-right.search").width("85%"); 
+     $(".columns.columns-right.btn-group.float-right").width("12%"); 
+     $(".keep-open.btn-group").width("100px"); 
+ }); 
+
+
+</script>
+
+<script>
+var report_0 = [{"type": "string", "count": "1053", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "2105", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "3", "avglength": "4.0", "maxlength": "4"}];
+var report_1 = [{"type": "string", "count": "2108", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1053", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_2 = [{"type": "string", "count": "1757", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1404", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_3 = [{"type": "string", "count": "2458", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "703", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_4 = [{"type": "string", "count": "2107", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1054", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_5 = [{"type": "string", "count": "1757", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1404", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_6 = [{"type": "string", "count": "1755", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1406", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_7 = [{"type": "string", "count": "1756", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1405", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_8 = [{"type": "string", "count": "1756", "avglength": "1.0", "maxlength": "1"}, {"type": "int", "count": "1405", "avglength": "1.0", "maxlength": "1"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+var report_9 = [{"type": "string", "count": "3161", "avglength": "8.0", "maxlength": "8"}, {"type": "int", "count": "0", "avglength": "None", "maxlength": "None"}, {"type": "float", "count": "0", "avglength": "None", "maxlength": "None"}];
+$(function () {
+
+	$('#table_report_0').bootstrapTable({
+	 data : report_0
+	});
+
+	$('#table_report_1').bootstrapTable({
+	 data : report_1
+	});
+
+	$('#table_report_2').bootstrapTable({
+	 data : report_2
+	});
+
+	$('#table_report_3').bootstrapTable({
+	 data : report_3
+	});
+
+	$('#table_report_4').bootstrapTable({
+	 data : report_4
+	});
+
+	$('#table_report_5').bootstrapTable({
+	 data : report_5
+	});
+
+	$('#table_report_6').bootstrapTable({
+	 data : report_6
+	});
+
+	$('#table_report_7').bootstrapTable({
+	 data : report_7
+	});
+
+	$('#table_report_8').bootstrapTable({
+	 data : report_8
+	});
+
+	$('#table_report_9').bootstrapTable({
+	 data : report_9
+	});
+});
+
+</script>
+
   </body>
 </html>

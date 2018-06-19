@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
-import csv, sys, re
+import csv, sys, re, os, argparse
+# GLOBALS # They suck, but its a small program so whatever
+columns = []
 global row_count
+###########
 from ColumnClass import *
 from htmlHelpers import *
 
 
-
-
 # Stuff for plotting #
-import matplotlib # so that you can save images out
-matplotlib.use('Agg')
+import matplotlib 
+matplotlib.use('Agg') # so that you can save images out
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 ######################
@@ -19,9 +20,7 @@ import matplotlib as mpl
 # - Would like to be able to sample a certain % of the file (helpful for large files)
 # - Look out for fixed width 
 
-# GLOBALS # They suck, but its a small program so whatever
-columns = []
-###########
+
 
 def Initialize(filename, newline='\n', delimiter=',', quotechar='"', has_header=True):   
     with open(filename, 'r', newline=newline) as csvfile:
@@ -87,12 +86,19 @@ def DetermineDataType(index, datum):
     datum = datum.strip()
     
     # Going to assume that if it doesn't fall into integer or float it's a string
-    if (re.match(r'\d+', datum)): 
+    if (re.match(r'^\d+$', datum)): 
         columns[index].int_count += 1
         if (columns[index].int_avglength == None):
             columns[index].int_avglength = len(datum)
         else:
             columns[index].int_avglength = iterative_mean(columns[index].int_avglength, index, datum)
+
+        # Max Length        
+        if (columns[index].int_maxlength == None):
+            columns[index].int_maxlength = len(datum)
+        else:
+            if len(datum) > columns[index].int_maxlength: columns[index].int_maxlength = len(datum)
+
 
     # FLOAT [-+]?[0-9]*\.?[0-9]+
     elif (re.match(r'[-+]?[0-9]*\.?[0-9]+', datum)): 
@@ -102,6 +108,13 @@ def DetermineDataType(index, datum):
         else:
             columns[index].float_avglength = iterative_mean(columns[index].float_avglength, index, datum)
             
+        # Max Length        
+        if (columns[index].float_maxlength == None):
+            columns[index].float_maxlength = len(datum)
+        else:
+            if len(datum) > columns[index].float_maxlength: columns[index].float_maxlength = len(datum)
+
+
     # STRING
     else: 
         # Here we will keep track of trimmed strings
@@ -111,6 +124,25 @@ def DetermineDataType(index, datum):
         else:
             columns[index].string_avglength = iterative_mean(columns[index].string_avglength, index, datum)
 
+        # Max Length        
+        if (columns[index].string_maxlength == None):
+            columns[index].string_maxlength = len(datum)
+        else:
+            if len(datum) > columns[index].string_maxlength: columns[index].string_maxlength = len(datum)
+        
+
+def CreateTableStatement():
+    CreateSQL = "Create table " + args.TableName + " (\n"
+    
+    
+    for i, column in enumerate(columns):
+        CreateSQL += column.header + " " + column.predicted_datatype 
+        
+        if (column.predicted_datatype == "strings") : CreateSQL += " " + str(column.pd_max_length)
+        if (i != len(columns) - 1) : CreateSQL += ", \n"
+    CreateSQL += "\n) DISTRIBUTE ON RANDOM;"
+    print (CreateSQL);
+    
 
 def iterative_mean(mean, num_items, value):
     new_mean = mean + ( float(1/(num_items+1)) * (float(len(str(value))) - mean))
@@ -138,14 +170,16 @@ def ProgressBar(count, total, status=''):
 
 
 
-
 # MAIN
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-TableName", help="Add desired table name for create table output.", default="<INSERT TABLENAME>")
+    args = parser.parse_args()
+
     Profiler("./example.csv")
     PageHeader("./test.html")
-    OverallReport_Top("./test.html")
-    # ColumnPanel("./test.html")
-    PageFooter("./test.html")
+    OverallReport_Top("./test.html", row_count)
+
     
     # Calculate the statistics for each column
     print ( "{}      {}    {}                 {}".format("Pos", "DataType", "Counts", "%"))
@@ -154,6 +188,17 @@ if __name__ == "__main__":
         print ( "{}        {}        {}/{}         {:.2f}%".format(col.col_number, col.predicted_datatype, col.pd_count, row_count, col.pd_confidence*100))
         # print ( "{}   {}    {}".format(col.string_count, col.int_count, col.float_count))
     #OverallReport_Table("./test.html", columns, row_count)
+
+    ColumnReport_Panels("./test.html", columns)
+    
+    # JS #
+    PageJS("./test.html")
+    OverallReport_TableJS2("./test.html", columns, row_count)
+    PageLoadJS("./test.html")
     ColumnReportsJS("./test.html", columns) # Create the table data and the javascript links to data<->table
     
-    ColumnReport_Panels("./test.html", columns)
+    # HTML # 
+    PageFooter("./test.html")
+    CreateTableStatement()
+    
+    
